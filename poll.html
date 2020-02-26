@@ -8,8 +8,9 @@
 <body>
   <form>
     <input type="text" name="left">
-    <button type="submit">Submit</button>
+    <button type="submit" id="intialSubmit">Submit</button>
   </form>
+  <div id="second"></div>
 
   <div id="history"></div>
   <div id="vote">
@@ -20,8 +21,28 @@
   let counter = 0;
   const select = $('<select name="options"><option value="" selected disabled hidden>Choose</option></select>');
   const button = $('<button type="submit">Vote</button>');
-  // Respond to submit events
+  const prompt = $('<p id="prompt">Enter a question:</p>')
+
+  $('form').append(prompt);
   $('form').on('submit', function(event) {
+    const form = $(this); // JQuery object representing the form
+    event.preventDefault(); // Don't really submit the form
+
+    const textBox = $('<input type="text" name="l">');
+    const btn = $('<button type="submit">Submit</button>');
+    const inputs = form.find('input');
+    const p = $(`<p>enter answers for: ${inputs.val()}</p>`);
+
+    $('form').remove();
+    $('#second').append(p);
+    $('#second').append(textBox);
+    $('#second').append(btn);
+
+});
+
+  // Respond to submit events
+  $('#second').on('submit', function(event) {
+    console.log("here");
     const form = $(this); // JQuery object representing the form
     event.preventDefault(); // Don't really submit the form
 
@@ -38,7 +59,7 @@
     $('#vote').append(button);
   });
 
-  $('.vote').on('submit', function(event) {
+  $('#vote').on('submit', function(event) {
     const form = $(this); // JQuery object representing the form
     event.preventDefault(); // Don't really submit the form
 
