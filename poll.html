@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>JQuery Objects</title>
+  <title>Poll</title>
 </head>
 <body>
   <form>
@@ -12,7 +12,6 @@
     <button type="submit">Submit</button>
   </form>
   <div id="second"></div>
-
   <div id="history"></div>
   <div id="vote">
   </div>
@@ -62,18 +61,18 @@
   $('form').on('submit', function(event) {
     const form = $(this); // JQuery object representing the form
     event.preventDefault(); // Don't really submit the form
-
     const textBox = $('<input type="text" name="l">');
-    const inputs = form.find('input');
-    const p = $(`<h1>Enter answers for: ${inputs.val()}</h1>`);
+    const input = $('input');
+    const item = input.val();
+    input.val('');
+    const p = $(`<h1>Enter answers for: ${item}</h1>`);
     $('#second').append(p);
     $('#second').append(textBox);
     $('#second').append('<button type="submit">Submit</button>');
-    for (let input of inputs) {
-      input = $(input); // Turn into a JQuery object
-      const v = $(`<h1 value="${input.val()}">${input.val()}</h1>`); // New list item
-      $('#second').append(v);
-      input.val(''); // Empty out the box
+    // Add a non-empty item to the list
+    if (item) {
+      $('#placeholder').remove();
+      $('#second').append($(`<h1 value="${item}">${item}</h1>`));
     }
     $('form').remove();
 });
