@@ -7,8 +7,9 @@
 </head>
 <body>
   <form>
+    <h1>Enter a question:</h1>
     <input type="text" name="left">
-    <button type="submit" id="intialSubmit">Submit</button>
+    <button type="submit">Submit</button>
   </form>
   <div id="second"></div>
 
@@ -55,7 +56,7 @@
   let counter = 0;
   const select = $('<select name="options"><option value="" selected disabled hidden>Choose</option></select>');
   const button = $('<button type="submit">Vote</button>');
-  const prompt = $('<p id="prompt">Enter a question:</p>')
+  const prompt = $('<h1 id="prompt">Enter a question:</h1>')
 
   $('form').append(prompt);
   $('form').on('submit', function(event) {
@@ -63,15 +64,18 @@
     event.preventDefault(); // Don't really submit the form
 
     const textBox = $('<input type="text" name="l">');
-    const btn = $('<button type="submit">Submit</button>');
     const inputs = form.find('input');
-    const p = $(`<p>enter answers for: ${inputs.val()}</p>`);
-
-    $('form').remove();
+    const p = $(`<h1>Enter answers for: ${inputs.val()}</h1>`);
     $('#second').append(p);
     $('#second').append(textBox);
-    $('#second').append(btn);
-
+    $('#second').append('<button type="submit">Submit</button>');
+    for (let input of inputs) {
+      input = $(input); // Turn into a JQuery object
+      const v = $(`<h1 value="${input.val()}">${input.val()}</h1>`); // New list item
+      $('#second').append(v);
+      input.val(''); // Empty out the box
+    }
+    $('form').remove();
 });
 
   // Respond to submit events
