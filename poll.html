@@ -57,7 +57,6 @@
   const button = $('<button type="submit">Vote</button>');
   const prompt = $('<h1 id="prompt">Enter a question:</h1>')
 
-  $('form').append(prompt);
   $('form').on('submit', function(event) {
     const form = $(this); // JQuery object representing the form
     event.preventDefault(); // Don't really submit the form
@@ -71,7 +70,6 @@
     $('#second').append('<button type="submit">Submit</button>');
     // Add a non-empty item to the list
     if (item) {
-      $('#placeholder').remove();
       $('#second').append($(`<h1 value="${item}">${item}</h1>`));
     }
     $('form').remove();
