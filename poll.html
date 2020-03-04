@@ -114,15 +114,6 @@
   $('.vote').on('submit', function(event) {
     const form = $(this); // JQuery object representing the form
     event.preventDefault(); // Don't really submit the form
-
-    // Translate each input value into a list item
-    const inputs = form.find('input'); // JQuery object represent all inputs
-    for (let input of inputs) {
-      input = $(input); // Turn into a JQuery object
-      const v = $(`<option value="${input.val()}">${input.val()}</option>`); // New list item
-      select.append(v);
-      input.val(''); // Empty out the box
-    }
   });
   counter++;
   </script>
