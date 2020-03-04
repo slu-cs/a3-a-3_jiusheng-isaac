@@ -65,7 +65,8 @@
     const p = $(`<h1>Enter answers for: ${item}</h1>`);
     $('#second').append(p);
     $('#second').append(textBox);
-    $('#second').append('<button>Submit</button>');
+    $('#second').append('<button id="submit">Submit</button>');
+    $('#second').append('<button id="done">Done</button>');
     // Add a non-empty item to the list
     if (item) {
       $('#second').append($(`<h1 value="${item}">${item}</h1>`));
@@ -74,8 +75,7 @@
 });
 
   // Respond to submit events
-  $('#second').on('click', 'button', function(event) {
-    console.log("here");
+  $('#second').on('click', '#submit', function(event) {
     const form = $(this); // JQuery object representing the form
     event.preventDefault(); // Don't really submit the form
 
@@ -91,6 +91,11 @@
       vote.append($('<button class="btn">Vote</button>'));
     };
   });
+  // Respond to submit events
+  $('#second').on('click', '#done', function(event) {
+    const form = $(this); // JQuery object representing the form
+    event.preventDefault(); // Don't really submit the form
+  });
 
   $('#vote').on('submit', function(event) {
     const form = $(this); // JQuery object representing the form
@@ -104,11 +109,10 @@
       select.append(v);
       input.val(''); // Empty out the box
     }
+
+
   });
-
   counter++;
-
-
   </script>
 </body>
 </html>
