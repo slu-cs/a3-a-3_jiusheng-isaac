@@ -89,27 +89,14 @@
     $('.poll').append(select);
   });
 
-  // Return to question creation page
+  // Poll finished
   $('form').on('click', '#done', function(event) {
     const form = $(this); // JQuery object representing the form
     event.preventDefault(); // Don't really submit the form
-
-    // Ignore anything in the text box and clear it
-    const input = $('input');
-    input.val('');
-    select = $('<select name="options"><option value="" selected disabled hidden>Choose</option></select>');
-    $('form .prompt').replaceWith('<h1 class="prompt">Enter a question:</h1>');
-    $('form .submit').replaceWith('<button type="submit" class="submit">Submit</button>');
-    $('#done').replaceWith('<button id="finish">Finished</button>');
-  });
-
-  // Poll finished
-  $('form').on('click', '#finish', function(event) {
-    const form = $(this);
-    event.preventDefault();
     $('form').remove();
     $('.vote').append($('<button type="submit" id="vote">Vote</button>'));
-  })
+  });
+
 
   $('.vote').on('submit', function(event) {
     const form = $(this); // JQuery object representing the form
