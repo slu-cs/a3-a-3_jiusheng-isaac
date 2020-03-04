@@ -12,8 +12,8 @@
     <button type="submit" class="submit">Submit</button>
   </form>
   <div class="poll"></div>
-  <div class="vote">
-  </div>
+  <div class="vote"></div>
+  <div class="result"></div>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script>
   /* Code from Todo exercise
@@ -50,10 +50,9 @@
   });
   */
 
-  // Number of times the form has been submitted
-  let counter = 0;
+  const results = [];
   let select = $('<select id="select" name="options"><option value="" selected disabled hidden>Choose</option></select>');
-
+  let counter = 0;
   // Enter a question
   $('form').on('submit', function(event) {
     const form = $(this); // JQuery object representing the form
@@ -94,12 +93,15 @@
     $('.vote').append($('<button type="submit" id="vote">Vote</button>'));
   });
 
-
+  // Voting
   $('.vote').on('click', function(event) {
     const form = $(this); // JQuery object representing the form
     event.preventDefault(); // Don't really submit the form
     alert("Value: " + $('#select').val());
+    results.push({option: $('#select').val(), Counts: counter});
+    console.log(results);
   });
+
   counter++;
   </script>
 </body>
