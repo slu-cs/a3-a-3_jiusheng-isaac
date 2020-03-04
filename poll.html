@@ -66,11 +66,11 @@
       $('#finish').replaceWith('<button id="done">Done</button>');
     } else {
         $('form').append('<button id="done">Done</button>');
-    };
+    }
     // Add a non-empty item to the list
     if (item) {
       $('#poll').append($(`<h1 value="${item}">${item}</h1>`));
-    };
+    }
 });
 
   // Enter answers for this question
@@ -86,8 +86,6 @@
     select.append($(`<option value="${item}">${item}</option>`))
     // Add to the page
     $('#poll').append(select);
-    const vote = $('#vote');
-    if (!($('.btn')[0])) vote.append($('<button class="btn">Vote</button>'));
   });
 
   // Return to question creation page
@@ -102,9 +100,16 @@
     $('form .prompt').replaceWith('<h1 class="prompt">Enter a question:</h1>');
     $('form .submit').replaceWith('<button type="submit" class="submit">Submit</button>');
     $('#done').replaceWith('<button id="finish">Finished</button>');
-
   });
 
+  // Poll finished
+  $('form').on('click', '#finish', function(event) {
+    const form = $(this);
+    event.preventDefault();
+    $('form').remove();
+    $('#vote').append($('<button class="btn">Vote</button>'));
+  })
+  
   $('#vote').on('submit', function(event) {
     const form = $(this); // JQuery object representing the form
     event.preventDefault(); // Don't really submit the form
