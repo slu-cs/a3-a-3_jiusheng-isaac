@@ -97,10 +97,12 @@
   $('.vote').on('click', function(event) {
     const form = $(this); // JQuery object representing the form
     event.preventDefault(); // Don't really submit the form
-    alert("Value: " + $('#select').val());
     const selectedItem = $('#select').val();
     results = getResult(results, selectedItem);
-    console.log(results);
+    $('.result li').remove();
+    for (r of results) {
+      $('.result').append($(`<li>${r.Option}: ${r.Counts}</li>`));
+    }
   });
 
   const getResult = function(arr, item) {
