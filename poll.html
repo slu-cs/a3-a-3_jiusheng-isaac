@@ -11,6 +11,7 @@
     <input type="text" name="left">
     <button type="submit" class="submit">Submit</button>
   </form>
+  <div class="question"></div>
   <div class="poll"></div>
   <div class="vote"></div>
   <div class="result"></div>
@@ -52,21 +53,23 @@ $('ul').append($('<li id="placeholder">Think of something to do!</li>'));
 
 let results = [];
 let select = $('<select id="select" name="options"><option value="" selected disabled hidden>Choose</option></select>');
-
+let quest = null;
 // Enter a question
 $('form').on('submit', function(event) {
   const form = $(this); // JQuery object representing the form
   event.preventDefault(); // Don't really submit the form
   const input = $('input');
   const item = input.val();
+  quest = input.val();
   input.val('');
   $('form .prompt').replaceWith(`<h1 class="prompt">Enter answers for: ${item}</h1>`);
   $('form .submit').replaceWith('<button class="submit" id="submit">Submit</button>');
   $('form').append('<button id="done">Done</button>');
-
+  console.log(quest);
   // Add a non-empty item to the list
   if (item) {
-    $('.poll').append($(`<h1 value="${item}">${item}</h1>`));
+    $('.question').append($(`<h1 id=h1 value="${item}">${item}</h1>`));
+    $('.question').hide();
   }
 });
 
@@ -90,7 +93,10 @@ $('form').on('click', '#done', function(event) {
   const form = $(this); // JQuery object representing the form
   event.preventDefault(); // Don't really submit the form
   $('form').remove();
+  console.log(quest);
+  $('.question').show();
   $('.vote').append($('<button type="submit" id="vote">Vote</button>'));
+
 });
 
 // Voting
