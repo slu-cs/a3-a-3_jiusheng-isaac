@@ -4,17 +4,23 @@
 <head>
   <meta charset="utf-8">
   <title>Poll</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 <body>
-  <form>
-    <h1 class="prompt">Enter a question:</h1>
-    <input type="text" name="left">
-    <button type="submit" class="submit">Submit</button>
-  </form>
-  <div class="question"></div>
-  <div class="poll"></div>
-  <div class="vote"></div>
-  <div class="result"></div>
+
+  <div class="form-group ml-4">
+    <form>
+      <h1 class="prompt">Enter a question:</h1>
+      <input type="text" class="form-control-lg" name="left">
+      <button type="submit" class="submit btn btn-primary">Submit</button>
+    </form>
+    <div class="question"></div>
+    <div class="poll"></div>
+    <div class="vote"></div>
+    <div class="result"></div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script>
   /* Code from Todo exercise
@@ -52,7 +58,7 @@ $('ul').append($('<li id="placeholder">Think of something to do!</li>'));
 */
 
 let results = [];
-let select = $('<select id="select" name="options"><option value="" selected disabled hidden>Choose</option></select>');
+let select = $('<select class="input-group custom-select mt-3 w-25" id="select" name="options"><option value="" selected disabled hidden>Choose</option></select>');
 let quest = null;
 // Enter a question
 $('form').on('submit', function(event) {
@@ -63,8 +69,8 @@ $('form').on('submit', function(event) {
   quest = input.val();
   input.val('');
   $('form .prompt').replaceWith(`<h1 class="prompt">Enter answers for: ${item}</h1>`);
-  $('form .submit').replaceWith('<button class="submit" id="submit">Submit</button>');
-  $('form').append('<button id="done">Done</button>');
+  $('form .submit').replaceWith('<button class="submit btn btn-primary" id="submit">Submit</button>');
+  $('form').append('<button class="btn btn-secondary" id="done">Done</button>');
   console.log(quest);
   // Add a non-empty item to the list
   if (item) {
@@ -95,7 +101,7 @@ $('form').on('click', '#done', function(event) {
   $('form').remove();
   console.log(quest);
   $('.question').show();
-  $('.vote').append($('<button type="submit" id="vote">Vote</button>'));
+  $('.vote').append($('<button type="submit" class="btn btn-primary mt-3" id="vote">Vote</button>'));
 
 });
 
@@ -106,10 +112,13 @@ $('.vote').on('click', function(event) {
   const selectedItem = $('#select').val();
   if (selectedItem) {
     results = getResult(results, selectedItem);
-    if (!$('.result ul')[0]) $('.result').append($('<ul>Results</ul>'));
+    if (!$('.result ul')[0]) $('.result').append($('<ul class="list-group w-25 "><h2>Results</h2></ul>'));
     $('.result li').remove();
     for (r of results) {
-      $('.result ul').append($(`<li>${r.Option}: ${r.Counts}</li>`));
+      $('.result ul').append($(`<li class="list-group-item d-flex justify-content-between align-items-center">
+      ${r.Option}
+      <span class="badge badge-primary badge-pill">${r.Counts}</span>
+      </li>`));
     }
   }
 });
