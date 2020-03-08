@@ -2,5 +2,4 @@
 CS332 Assignment #3
 
 Citations:
-
-hello 
+https://api.jquery.com/
